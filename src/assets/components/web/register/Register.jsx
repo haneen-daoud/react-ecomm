@@ -48,7 +48,7 @@ formik.setFieldValue('image',event.target.files[0])
         onSubmit,
         validationSchema:registerSchema
     })
-    console.log(formik);
+  
 const inputs=[
     {
       id:'useername',

@@ -7,6 +7,7 @@ import DashboardLayout from './DashboardLayout.jsx';
 import HomeDashboard from '../dashboard/home/HomeDashboard.jsx';
 import CategoriesDashboard from '../dashboard/categories/CategoriesDashboard.jsx'
 import Register from '../web/register/Register.jsx'
+import Login from '../web/login/Login.jsx'
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       path:"categories",
       element:<Categories/>
     },
+    {
+      path:"login",
+      element:<Login/>
+    }
     ]
   },
   {

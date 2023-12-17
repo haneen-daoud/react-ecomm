@@ -1,7 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-export default function Navbar() {
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { CartContext } from '../context/Cart'
+
+
+export default function Navbar({user,setUser}) {
+  const{count}=useContext(CartContext)
+ const navigate=useNavigate()
+  const logout =()=>{
+    localStorage.removeItem("UserToken")
+    setUser(null)
+    navigate('./home')
+
+  }
+ 
   return (
+ 
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container">
     <a className="navbar-brand" href="#">T-shop</a>
@@ -12,7 +25,7 @@ export default function Navbar() {
       <ul className="navbar-nav m-auto mb-2 mb-lg-0">
        
         <li className="nav-item">
-          <a className="nav-link" href="#">Home</a>
+          <Link className="nav-link" to="/">Home </Link>
         </li>
 
 
@@ -24,6 +37,9 @@ export default function Navbar() {
         <li className="nav-item">
         <a className="nav-link" href="#">Products</a>
       </li>
+      {user&& <li className="nav-item">
+        <Link className="nav-link" to={"/cart"}>Cart <i class="fi fi-rr-shopping-cart">{count}</i></Link>
+      </li>}
      
      
       </ul>
@@ -32,17 +48,29 @@ export default function Navbar() {
       <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Dropdown
       </a>
+   
       <ul className="dropdown-menu ">
+        {!user ?<>
         <li><Link className="dropdown-item" to="/register">register</Link></li>
         <li><hr className="dropdown-divider" /></li>
-        <li><a className="dropdown-item" href="#">login</a></li>
+        <li><Link className="dropdown-item" to="/login">login</Link></li>
+        </>:
+
+        <>
+        <li><Link className="dropdown-item" to="/profile">profile</Link></li>
+        <li><hr className="dropdown-divider" /></li>
+        <li><Link className="dropdown-item" onClick={logout}>logout</Link></li>
+        </>
+}
       </ul>
     </li>
       </ul>
-   
     </div>
   </div>
+
 </nav>
+
+
 
   )
 }
